@@ -15,7 +15,8 @@ app.get("/list", (req, res) => {
     let list = `<h1>링크를 선택하세요</h1><h2><ul>`;
     data.forEach(
       (v) =>
-        (list += `<li><a href="${v}">${v}</a><a href="${v}" style="text-decoration-line:none;" download>[Download]</a></li>`)
+        (list += `<li><a href="${v}">${v}</a><a href="${v}" 
+          style="text-decoration-line:none;" download>[Download]</a></li>`)
     );
     list += `</ul></h2>`;
     res.send(list);
