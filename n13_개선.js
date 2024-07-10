@@ -28,8 +28,7 @@ app.get("/story", (req, res) => {
 
   list += `</ul></h2>`;
   list += arr[req.query.id] ?? " 선택하세요 ";
-
-  res.send(list);
+  -res.send(list);
 });
 
 app.listen(port, () => {
