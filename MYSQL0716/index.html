@@ -6,9 +6,11 @@
     <title>Document</title>
     <style>
       body {
+        width: 500px;
         margin: 0;
         padding: 20px;
-        background-color: rgb(240, 240, 192);
+        background-color: rgb(165, 165, 165);
+        border-radius: 5px;
       }
 
       fieldset {
@@ -20,8 +22,8 @@
       }
 
       legend {
-        background-color: rgb(240, 240, 192);
-        border: 3px solid rgba(12, 45, 78, 0.885);
+        background-color: rgb(243, 243, 243);
+        border: 3px solid rgba(255, 255, 255, 0.885);
         padding: 3px 7px;
         border-radius: 5px;
         font-weight: bold;
@@ -42,7 +44,7 @@
       }
 
       button {
-        background-color: rgba(12, 45, 78, 0.885);
+        background-color: rgba(118, 118, 118, 0.885);
         color: #fff;
         padding: 10px 20px;
         border: none;
@@ -60,14 +62,21 @@
 
   <body>
     <fieldset>
-      <legend>MySQL</legend>
+      <legend>회원 가입창</legend>
       <form action="data" id="dataForm">
-        <label for="name">Name:</label>
+        <label for="id">아이디</label>
+        <input type="text" id="id" name="id" /><br />
+        <label for="password">나이</label>
+        <input type="password" id="password" name="password" /><br />
+        <label for="name">이름</label>
         <input type="text" id="name" name="name" /><br />
-        <label for="dob">Date of Birthday:</label>
-        <input type="date" id="dob" name="dob" /><br />
-        <button type="submit">버튼</button>
-        <button type="reset">내용지우기</button>
+        <label for="email">이메일</label>
+        <input type="text" id="email" name="email" /><br />
+
+        <button type="submit">가입하기</button>
+        <button type="reset">다시입력</button>
+        <button type="list">불러오기</button>
+        <button type="button" onclick="location.href='' ">리스트보기</button>
       </form>
     </fieldset>
   </body>

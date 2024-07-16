@@ -25,6 +25,15 @@ app.get("/", (req, res) => {
   console.log("웹에 정상 접속 하였습니다.");
 });
 
+app.get("/list", (req, res) => {
+  console.log("List requested");
+  db.query("SELECT * FROM web2", (err, result) => {
+    const data = result;
+    console.log(data);
+    res.send(data);
+  });
+});
+
 app.get("/data", (req, res) => {
   const { id, password, name, email } = req.query;
   db.query(
