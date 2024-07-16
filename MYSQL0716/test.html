@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>리스트</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        text-align: center;
+        width: 80%;
+        margin: auto;
+      }
+
+      th,
+      tr,
+      td {
+        border: 1px solid #ccc;
+      }
+
+      td {
+        width: 20%;
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      th {
+        background-color: lightblue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- table>tr>th*5^tr>td*5 -->
+    <h2>데이터베이스 내용</h2>
+    <table>
+      <tr>
+        <th>No.</th>
+        <th>ID</th>
+        <th>이름</th>
+        <th>나이</th>
+        <th>이메일</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>aaa</td>
+        <td>홍길동</td>
+        <td>33</td>
+        <td>e@eeee.com</td>
+      </tr>
+    </table>
+  </body>
+</html>
+<!-- +-----+------+-----------+------+-----------+
+| num | id   | name      | age  | email     |
++-----+------+-----------+------+-----------+
+|   1 | 111  | kkk       |   33 | emal      |
+|   2 | abc  | 하하호    |   33 | e         |
+|   3 | aaa  | kkkk      |   33 | afe@hlkjh |
++-----+------+-----------+------+-----------+ -->

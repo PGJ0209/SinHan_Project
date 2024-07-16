@@ -26,11 +26,66 @@ app.get("/", (req, res) => {
 });
 
 app.get("/list", (req, res) => {
-  console.log("List requested");
-  db.query("SELECT * FROM web2", (err, result) => {
-    const data = result;
+  db.query("SELECT * from web2", (err, results) => {
+    const data = results;
     console.log(data);
-    res.send(data);
+    let list = `<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">`;
+    list += `    <title>리스트</title>`;
+    list += `    <style>`;
+    list += `        table {`;
+    list += `            border-collapse: collapse;`;
+    list += `            text-align: center;`;
+    list += `            width: 80%;`;
+    list += `            margin: auto;`;
+    list += `        }`;
+    list += ``;
+    list += `        th,`;
+    list += `        tr,`;
+    list += `        td {`;
+    list += `            border: 1px solid #ccc;`;
+    list += `        }`;
+    list += ``;
+    list += `        td {`;
+    list += `            width: 20%;`;
+    list += `        }`;
+    list += ``;
+    list += `        h2 {`;
+    list += `            text-align: center;`;
+    list += `        }`;
+    list += ``;
+    list += `        th {`;
+    list += `            background-color: lightblue;`;
+    list += `        }`;
+    list += `    </style>`;
+    list += `</head>`;
+    list += ``;
+    list += `<body>`;
+    list += `    <!-- table>tr>th*5^tr>td*5 -->`;
+    list += `    <h2>데이터베이스 내용</h2>`;
+    list += `<button type="button" onclick="location.href='/' ">뒤로가기</button>`;
+    list += `    <table>`;
+    list += `        <tr>`;
+    list += `            <th>ID.</th>`;
+    list += `            <th>비밀번호</th>`;
+    list += `            <th>이름</th>`;
+    list += `            <th>이메일</th>`;
+    list += `        </tr>`;
+
+    data.forEach((v) => {
+      list += `        <tr>`;
+      list += `            <td>${v.id}</td>`;
+      list += `            <td>${v.password}</td>`;
+      list += `            <td>${v.name}</td>`;
+      list += `            <td>${v.email}</td>`;
+
+      list += `        </tr>`;
+    });
+
+    list += `    </table>`;
+    list += `</body>`;
+    list += ``;
+    list += `</html>`;
+    res.send(list);
   });
 });
 
