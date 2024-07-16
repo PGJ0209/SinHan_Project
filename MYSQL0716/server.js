@@ -9,7 +9,7 @@ const db = mysql.createConnection({
   port: 3306,
   password: "1234",
   database: "test_db",
-  table: "web2",
+  table: "web",
 });
 
 db.connect((error) => {
@@ -26,17 +26,16 @@ app.get("/", (req, res) => {
 });
 
 app.get("/data", (req, res) => {
-  const { id, password, name, email } = req.query;
+  const { name, dob } = req.query;
   db.query(
-    "INSERT INTO web2 (id, password, name, email) VALUES (?,?,?,?)",
-    [id, password, name, email],
+    "INSERT INTO web (name, dob) VALUES (?,?)",
+    [name, dob],
     (err, result) => {
       if (err) {
         console.log(err);
         return;
       }
-      console.log(`id: ${id} , password: ${password},
-         name: ${name}, email: ${email}`);
+      console.log(`name: ${name}, dob: ${dob}`);
       console.log("Data inserted successfully");
     }
   ); // MySQL query here
