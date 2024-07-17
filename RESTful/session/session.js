@@ -28,24 +28,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  res.send(`
-    <!DOCTYPE html>
-    <html lang="ko">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    </head>
-        <body>
-            <form action="/login" method="POST">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username">
-                <label for="pw">Password:</label>
-                <input type="password" id="pw" name="password">
-                <button type="submit">Login</button>
-            </form>
-        </body>
-    </html>`);
+  res.sendFile(__dirname + "/login.html");
 });
 
 app.post("/login", (req, res) => {
