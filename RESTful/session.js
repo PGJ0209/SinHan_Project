@@ -14,7 +14,17 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  if (req.session.loggedIn) {
+    res.send(`
+        <h2>${req.session.username}님 안녕하세요</h2>
+        <h2>${req.session.username}님의 개인공간입니다.</h2>
+        <hr/>
+        <h2>대충 개인 데이터베이스 목록</h2>
+        <button onclick="location.href='/logout'">로그아웃</button>
+        `);
+  } else {
+    res.sendFile(__dirname + "/index.html");
+  }
 });
 
 app.get("/login", (req, res) => {
@@ -48,9 +58,18 @@ app.post("/login", (req, res) => {
   } else {
     res.send(`
         <h3>정상적인 로그인이 필요합니다.</h3>
-        <button onclick="location.href='/'>뒤로가기</button>
+        <button onclick="location.href='/'">뒤로가기</button>
         `);
   }
+});
+
+app.get("/logout", (req, res) => {
+  req.session.destroy((e) => {
+    if (e) console.error(e);
+    res.send(
+      `<script>alert('로그아웃이 되었습니다!!');window.location.href='/'</script>`
+    );
+  });
 });
 
 app.listen(port, () => {
