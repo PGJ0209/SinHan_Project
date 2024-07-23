@@ -1,0 +1,7 @@
+1. 아이디: 영어(대소문자) 8자리 미만, 비번: 영어(대소)+숫자+10자리미만
+
+
+const{ username , password } = req.body;
+const { username:username , password:password} = req.body;
+{ 키 : 값,키 : 값,키 : 값,키 : 값 }
+키=값
