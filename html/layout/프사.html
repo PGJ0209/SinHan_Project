@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>프사</title>
+    <style>
+      #container {
+        width: 350px;
+        height: 350px;
+        margin: 30px auto;
+        position: relative;
+        overflow: hidden;
+      }
+      img {
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        box-shadow: 10px 10px 30px #000;
+        width: 200px;
+        position: absolute;
+        animation: move 5s infinite alternate;
+      }
+
+      @keyframes move {
+        0% {
+          top: 0;
+          left: 0;
+        }
+        25% {
+          top: 0;
+          left: calc(100% - 200px);
+        }
+        50% {
+          top: calc(100% - 200px);
+          left: calc(100% - 200px);
+        }
+        75% {
+          top: calc(100% - 200px);
+          left: 0;
+        }
+        100% {
+          top: 0;
+          left: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container">
+      <img
+        src="https://st.kakaocdn.net/shoppingstore/store/20240528180123_b9a6145839c346e3a34304f14163d941.png"
+        alt=""
+      />
+    </div>
+  </body>
+</html>

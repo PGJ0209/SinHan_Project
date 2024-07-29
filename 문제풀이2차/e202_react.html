@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .board_wrap {
+        width: 80%;
+        margin: 50px auto;
+      }
+
+      .board_title {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .board_list {
+        width: 100%;
+        border-top: 1px solid #aaa;
+      }
+
+      .board_list div {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+      }
+
+      .board_list .header {
+        font-weight: bold;
+        background-color: cornflowerblue;
+        color: white;
+      }
+
+      .board_list .row {
+        background-color: #eee;
+        border-bottom: 1px solid #aaa;
+      }
+
+      .board_list .row:nth-child(even) {
+        background-color: #e5e6f1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const users = [
+        {
+          id: 1,
+          title: "제목들1",
+          name: "john",
+          date: "2024-07-21",
+          count: 13,
+        },
+        {
+          id: 2,
+          title: "제목들2",
+          name: "Tome",
+          date: "2024-07-22",
+          count: 32,
+        },
+        { id: 3, title: "제목들3", name: "Jasy", date: "2024-07-23", count: 5 },
+        { id: 4, title: "제목들4", name: "Bill", date: "2024-07-24", count: 4 },
+        {
+          id: 5,
+          title: "제목들5",
+          name: "Steve",
+          date: "2024-07-25",
+          count: 1,
+        },
+      ];
+      const ListItem = () => {
+        return (
+          <>
+            {users.map((v) => {
+              return (
+                <div className="row">
+                  <div>{13}</div>
+                  <div>{title}</div>
+                  <div>{name}</div>
+                  <div>{"2024-07-29"}</div>
+                  <div>123</div>
+                </div>
+              );
+            })}
+          </>
+        );
+      };
+      const name = "박건준";
+      const title = "수업공지";
+      function List() {
+        return (
+          <div className="board_wrap">
+            <div className="board_title">
+              <h1>게시글 목록</h1>
+            </div>
+            <div className="board_list">
+              <div className="header">
+                <div>번호</div>
+                <div>제목</div>
+                <div>작성자</div>
+                <div>작성일</div>
+                <div>조회수</div>
+              </div>
+              <ListItem />
+            </div>
+          </div>
+        );
+      }
+      ReactDOM.createRoot(document.getElementById("root")).render(<List />);
+    </script>
+  </body>
+</html>

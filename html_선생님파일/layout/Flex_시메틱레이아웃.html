@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0
+        }
+
+        .wrap {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        header {
+            height: 65px;
+            background-color: rgb(221, 249, 250);
+            text-align: center;
+            color: rgb(75, 123, 28);
+        }
+
+        nav ul {
+            height: 30px;
+            background-color: darkgrey;
+            text-align: center;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            font-size: 2rem
+        }
+
+        li {
+            margin: 0 10px;
+        }
+
+        li a {
+            text-decoration-line: none;
+        }
+
+        section {
+            display: flex;
+            height: 100%;
+            flex: 1;
+        }
+
+        aside {
+            width: 20%;
+            background-color: rgb(186, 171, 255);
+        }
+
+        article {
+            width: 60%;
+            padding: 20px;
+        }
+
+        footer {
+            height: 70px;
+            background-color: darkgoldenrod;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- div.wrap>header+nav+section>aside+aticle+aside^footer -->
+    <div class="wrap">
+        <header>
+            <h1>NEVER</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="#">메일</a></li>
+                <li><a href="#">카페</a></li>
+                <li><a href="#">즐겨찾기</a></li>
+                <li><a href="#">지도</a></li>
+                <li><a href="#">뉴스</a></li>
+            </ul>
+        </nav>
+        <section>
+            <aside>
+                <img src="./aside.jpg" alt="광고">
+            </aside>
+            <article>
+                <h3>오늘은 많이 덥습니다.</h3>
+            </article>
+            <aside>로그인</aside>
+        </section>
+        <footer>
+            <span>회사소개인재채용제휴제안이용약관개인정보처리방침청소년보호정책네이버 정책고객센터ⓒ NAVER Corp.</span>
+        </footer>
+    </div>
+</body>
+
+</html>

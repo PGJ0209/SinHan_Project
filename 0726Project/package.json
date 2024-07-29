@@ -1,0 +1,14 @@
+{
+  "name": "0726Project",
+  "version": "1.0.0",
+  "description": "MySQL connection project",
+  "main": "server01.js",
+  "scripts": {
+    "start": "node server01.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "body-parser": "^1.19.0",
+    "mysql2": "^2.2.5"
+  }
+}

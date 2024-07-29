@@ -1,0 +1,23 @@
+1. nodejs 설치 (LTS)
+2. 버전확인
+3. http 로 서버구성 (v8엔진 , node 파일명.js)
+4. http 응용
+5. nodejs(http) + html => (웹서비스가능) , 위치경로반환 __dirname
+----------------------------------------
+6. express 설치 (프레임워크)
+7. 라우터생성 (호스트의 라우팅)
+8. 로거설치(morgan)
+9. REST API - GET( 1.query string, 2.path ) , POST
+  1) http://localhost:3000/book?uname= ...&bname=....
+  2) http://localhost:3000/book/김첨지/대박날/2020.2.11
+
+
+
+var => const , let
+,   :   ;   (   {   [   &  |  / \ `
+
+
+
+
+
+

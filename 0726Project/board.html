@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>프리미다이빙아카데미</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .board_wrap {
+        width: 80%;
+        margin: 50px auto;
+      }
+
+      .board_title {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .board_list {
+        width: 100%;
+        border-top: 2px solid #000;
+        border-radius: 5px;
+        box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .board_list div {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .board_list .header {
+        font-weight: bold;
+        background-color: #ade1ff;
+      }
+
+      .board_list .row {
+        background-color: #c2ffe7;
+      }
+
+      .board_list .row:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      .banner {
+        background: url("https://www2.padi.com/mypadi/uploadedImages/23_Toolbox/231_Marketing_Toolbox/2315_Image_Gallery/PADI_InstruFtr10_473x104.jpg")
+          no-repeat center;
+        width: 100%;
+        height: 200px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="board_wrap">
+      <div class="board_title">
+        <div class="banner">
+          <h1></h1>
+        </div>
+      </div>
+      <div class="board_list">
+        <div class="header">
+          <div>번호</div>
+          <div>제목</div>
+          <div>작성자</div>
+          <div>작성일</div>
+          <div>조회수</div>
+        </div>
+        <div class="row">
+          <div>1</div>
+          <div>토요일수업 공지사항</div>
+          <div>박건준</div>
+          <div>2024-07-26</div>
+          <div>21</div>
+        </div>
+        <!-- 추가 행은 여기에 추가 -->
+      </div>
+    </div>
+    <div id="root"></div>
+    <script>
+      function list() {
+        return React.createElement();
+      }
+
+      const domComp = document.querySelector("#root");
+      ReactDOM.render(React.createElement(list), domComp);
+    </script>
+    <script></script>
+  </body>
+</html>
