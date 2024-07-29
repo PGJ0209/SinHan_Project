@@ -59,8 +59,12 @@
       }
 
       button {
-        background-color: skyblue;
-        border-radius: 5px;
+        font-size: 1.2rem;
+        background-color: lightskyblue;
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
       }
 
       section {
@@ -84,72 +88,6 @@
         height: 70px;
         /* background-color: darkgoldenrod; */
         text-align: center;
-      }
-
-      .card {
-        max-width: 360px;
-        height: 400px;
-        background-color: #fff;
-        border-radius: 2rem;
-        overflow: hidden;
-        box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
-        display: flex;
-        flex-direction: column;
-        font: 1.5rem rgba(0, 0, 0, 0.8);
-      }
-
-      .banner {
-        background-image: url("https://mauiscubamike.com/wp-content/uploads/pexels-pia-b-3046582.png");
-        display: flex;
-        justify-content: center;
-      }
-
-      .profile {
-        width: 8rem;
-        height: 8rem;
-        background-image: url("https://play-lh.googleusercontent.com/-zU7mvWwmlvYZqjOieINQA5vkdAgfSNO8tCnfpdsbOVOuKGvqpcmov49ukzc0d4fqQ");
-        background-size: 120px;
-        border-radius: 50%;
-        box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5);
-        transform: translateY(50%);
-        transition: transform 250ms ease;
-      }
-
-      .profile:hover {
-        transform: translateY(50%) scale(1.3);
-      }
-
-      .name {
-        text-align: center;
-        padding-top: 68px;
-        font-size: medium;
-        font-weight: bold;
-      }
-
-      .follow-btn {
-        padding: 0 30px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      .follow-btn button {
-        font-size: medium;
-        font-weight: bold;
-        background-color: aqua;
-        border: none;
-        padding: 1rem;
-        outline: none;
-        border-radius: 50px;
-      }
-
-      .follow-btn button:hover {
-        background-color: yellow;
-        transform: scale(1.1);
-      }
-
-      .desc {
-        padding: 1.5rem;
       }
 
       h2 {
@@ -212,26 +150,22 @@
       <nav>
         <ul>
           <li><a href="#">홈</a></li>
-          <li><a href="#">게시글</a></li>
-          <li><a href="#">마이페이지</a></li>
-          <li><a href="#">About</a></li>
+          <li><a href="/e202_react">게시글</a></li>
+          <li><a href="/mypage">마이페이지</a></li>
+          <li><a href="/login">로그인</a></li>
         </ul>
       </nav>
       <section>
         <article class="article">
-          <div class="card">
-            <div class="banner">
-              <div class="profile"></div>
-            </div>
-            <h2 class="name">Park geonjun</h2>
-            <div class="follow-btn"><button>Follow</button></div>
-            <div class="desc">Padi 스쿠버다이빙 강사 박건준 입니다.</div>
-          </div>
+          안녕하세요 프리미다이빙아카데미 입니다.
         </article>
-        <aside><button>로그인</button></aside>
+        <aside></aside>
       </section>
       <footer>
-        <span>회사소개 개인, 개인서버동작, PGJ Corp.</span>
+        <span
+          >© PADI 2024 개인 정보 보호 정책 Accessibility @Copyright
+          프리미다이빙아카데미 Corp.</span
+        >
       </footer>
     </div>
   </body>
