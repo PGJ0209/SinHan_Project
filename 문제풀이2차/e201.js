@@ -2,6 +2,7 @@ const express = require("express");
 const mysql = require("mysql");
 const session = require("express-session");
 const bodyParser = require("body-parser"); // 설치생략
+const path = require("path"); // path 모듈 추가
 const app = express();
 const port = 3000;
 
@@ -84,7 +85,7 @@ app.get("/list", (req, res) => {
     list += `        }`;
     list += ``;
     list += `        td {`;
-    list += `            width: 20%;`;
+    list += `            width: 16%;`;
     list += `        }`;
     list += ``;
     list += `        h2 {`;
@@ -92,14 +93,14 @@ app.get("/list", (req, res) => {
     list += `        }`;
     list += ``;
     list += `        th {`;
-    list += `            background-color: lightblue;`;
+    list += `            background-color: rgb(121, 195, 255);`;
     list += `        }`;
     list += `    </style>`;
     list += `</head>`;
     list += ``;
     list += `<body>`;
     list += `    <!-- table>tr>th*5^tr>td*5 -->`;
-    list += `    <h2>데이터베이스 내용</h2>`;
+    list += `    <h2>게시글 목록</h2>`;
     list += `<button type="button" onclick="location.href='/'">뒤로가기</button>`;
 
     list += `    <table>`;
@@ -109,21 +110,33 @@ app.get("/list", (req, res) => {
     list += `            <th>작성자</th>`;
     list += `            <th>작성일자</th>`;
     list += `            <th>조회수</th>`;
+    if (req.session.loggedIn) {
+      list += `            <th>삭제</th>`;
+    }
+
     list += `        </tr>`;
 
-    data.forEach((v) => {
+    data.forEach((v, i) => {
       list += `        <tr>`;
       list += `            <td>${v.num}</td>`;
       list += `            <td>${v.title}</td>`;
       list += `            <td>${v.name}</td>`;
       list += `            <td>${v.date}</td>`;
       list += `            <td>${v.count}</td>`;
+      /* 예1 */
+      // list += `            <td><button id="del${i}">삭제</button></td>`;
+      /* 예2 */
+
+      if (req.session.loggedIn) {
+        list += `            <td><a href="/del?delitem=${v.num}">삭제</a></td>`;
+      }
       list += `        </tr>`;
     });
 
-    // if (req.session.loggedIn)
+    // console.log(1, req.session.loggedIn);
+    // if (req.session.loggedIn) {
     list += `    </table><button type="button" onclick="location.href='/content'">글쓰기</button>`;
-
+    // }
     list += `</body>`;
     list += ``;
     list += `</html>`;
@@ -133,18 +146,37 @@ app.get("/list", (req, res) => {
 
 app.post("/data", (req, res) => {
   const { title, name, date, content } = req.body;
+  // db.query("INSERT INTO tb2 ( title, name, date, content,count) VALUES (?,?,?,?,?)", [title, name, date, content, 0], (err, result) => {
   db.query(
-    "INSERT INTO tb2 ( title, name, date, content,count) VALUES (?,?,?,?,?)",
-    [title, name, date, content, 0],
+    `INSERT INTO tb2 ( title, name, date, content,count) VALUES ("${title}", "${name}", "${date}", "${content}",0)`,
     (err, result) => {
       if (err) {
         console.log(err);
         return;
       }
-      res.redirect("/");
+      res.send(
+        `<script>alert('내용이 저장 되었습니다');window.location.href='/list'</script>`
+      );
       console.log("Data inserted successfully");
     }
   ); // MySQL query here
+});
+// 삭제 기능
+app.get("/del", (req, res) => {
+  const delItem = req.query.delitem;
+  db.query(`DELETE FROM tb2 WHERE num = "${delItem}"`, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send(
+        `<script>alert('삭제 중 오류가 발생했습니다');window.location.href='/list'</script>`
+      );
+      return;
+    }
+    res.send(
+      `<script>alert('삭제가 완료되었습니다');window.location.href='/list'</script>`
+    );
+    console.log("Data deleted successfully");
+  });
 });
 
 app.listen(port, () => {
