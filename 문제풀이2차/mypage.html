@@ -48,7 +48,7 @@
       .follow-btn {
         padding: 0 30px;
         display: flex;
-        flex-direction: column;
+        /* flex-direction: column; */
         justify-content: center;
       }
 
@@ -59,6 +59,7 @@
         border: none;
         padding: 1rem;
         outline: none;
+        width: 48%;
         border-radius: 50px;
       }
 
@@ -70,6 +71,15 @@
       .desc {
         padding: 1.5rem;
       }
+
+      h2 {
+        padding: 1rem;
+      }
+
+      .article {
+        display: flex;
+        justify-content: center;
+      }
     </style>
   </head>
   <body>
@@ -78,7 +88,10 @@
         <div class="profile"></div>
       </div>
       <h2 class="name">Park geonjun #MSDT.454987</h2>
-      <div class="follow-btn"><button>Follow</button></div>
+      <div class="follow-btn">
+        <button onclick="window.location.href='list'">게시판</button>
+        <button onclick="window.location.href='content'">글쓰기</button>
+      </div>
       <div class="desc">Padi 스쿠버다이빙 강사 박건준 입니다.</div>
     </div>
   </body>

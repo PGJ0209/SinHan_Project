@@ -4,19 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const bt = document.getElementById("ok");
-        const modal = document.querySelector(".modal");
-        const modalBody = document.querySelector(".modal-body");
-        const inDiv = document.getElementById("inDiv");
-        bt.addEventListener("click", () => modal.classList.add("show"));
-        modal.addEventListener("click", (e) => {
-          modal.classList.remove("show");
-          inDiv.addEventListener("click", (event) => event.stopPropagation());
-        });
-      });
-    </script>
     <style>
       html,
       body {
@@ -25,16 +12,18 @@
       }
 
       .wrap {
+        margin: auto;
         display: flex;
         flex-direction: column;
-        height: 100%;
+        min-width: 760px;
+        height: 80%;
       }
 
       header {
         height: 65px;
         /* background-color: rgb(221, 249, 250); */
         text-align: center;
-        color: rgb(74, 198, 235);
+        color: skyblue;
       }
 
       nav ul {
@@ -50,17 +39,17 @@
 
       li a {
         margin: 0 20px;
-        background-color: lightskyblue;
+        background-color: rgb(96, 194, 255);
         color: #fff;
-        padding: 10px 20px;
-        border-radius: 20px;
+        padding: 5px 20px;
+        border-radius: 10px;
         box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
         text-decoration-line: none;
       }
 
       button {
         font-size: 1.2rem;
-        background-color: lightskyblue;
+        background-color: rgb(96, 194, 255);
         padding: 10px 20px;
         border-radius: 10px;
         border: none;
@@ -76,12 +65,13 @@
       aside {
         width: 20%;
         /* background-color: rgb(186, 171, 255); */
-        box-shadow: 10px;
       }
 
       article {
+        padding: 0 20px 0 60px;
         width: 80%;
-        padding: 20px;
+        text-align: center;
+        font-size: 2rem;
       }
 
       footer {
@@ -89,59 +79,11 @@
         /* background-color: darkgoldenrod; */
         text-align: center;
       }
-
-      h2 {
-        padding: 1rem;
-      }
-
-      .article {
-        display: flex;
-        justify-content: center;
-      }
-      .modal {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: none;
-        background-color: rgba(0, 0, 0, 0.5);
-      }
-
-      .modal.show {
-        display: block;
-      }
-
-      .modal-body {
-        position: relative;
-        top: calc(50% - 200px);
-        /* left: 35%; */
-        margin: 0 auto;
-        width: 250px;
-        height: 400px;
-        padding: 20px;
-        text-align: start;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-      }
     </style>
   </head>
 
   <body>
-    <div class="modal">
-      <div class="modal-body">
-        <h2>로그인</h2>
-        <form action="/" method="POST">
-          <label for="">Username:</label>
-          <input type="text" id="username" name="username" /><br />
-          <label for="">Password:</label>
-          <input type="text" id="pw" name="password" /><br />
-          <button type="submit">로그인</button>
-          <button type="reset">다시입력</button>
-        </form>
-      </div>
-    </div>
+    <!-- 모달창 생략 -->
     <!-- div.wrap>header+nav+section>aside+aticle+aside^footer -->
     <div class="wrap">
       <header>
@@ -150,7 +92,7 @@
       <nav>
         <ul>
           <li><a href="#">홈</a></li>
-          <li><a href="/e202_react">게시글</a></li>
+          <li><a href="/list">게시글</a></li>
           <li><a href="/mypage">마이페이지</a></li>
           <li><a href="/login">로그인</a></li>
         </ul>
@@ -159,7 +101,6 @@
         <article class="article">
           안녕하세요 프리미다이빙아카데미 입니다.
         </article>
-        <aside></aside>
       </section>
       <footer>
         <span
