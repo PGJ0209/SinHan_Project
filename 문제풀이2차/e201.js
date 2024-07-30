@@ -42,16 +42,38 @@ app.post("/login", (req, res) => {
   const { username, password } = req.body;
   if (username === "user" && password == "1234") {
     req.session.loggedIn = true;
+    if (!req.session.num1) {
+      req.session.num1 = 1;
+    } else {
+      req.session.num1 += 1;
+    }
     req.session.username = username;
-    // res.redirect("/mypage");
     res.send(
-      `<script>alert('로그인이 되었습니다');window.location.href='/mypage'</script>`
+      `<script>alert('${req.session.num1}번째 로그인이 되었습니다');window.location.href='/mypage'</script>`
+    );
+  }
+  if (username === "admin" && password == "123456") {
+    req.session.adminOk = true;
+    res.send(
+      `<script>alert('관리자로 로그인이 되었습니다');window.location.href='/mypage'</script>`
     );
   }
 });
+app.get("/logout", (req, res) => {
+  req.session.loggedIn = false;
+  req.session.adminOk = false;
+  res.send(
+    `<script>alert('로그아웃 되었습니다.');window.location.href='/'</script>`
+  );
+});
+
 app.get("/mypage", (req, res) => {
   if (req.session.loggedIn) {
     res.sendFile(__dirname + "/mypage.html");
+  } else if (req.session.adminOk) {
+    res.send(
+      "<h1>관리자페이지</h1><script>window.location.href='/list'</script>"
+    );
   } else {
     res.sendFile(__dirname + "/login.html");
   }
@@ -62,6 +84,23 @@ app.get("/content", (req, res) => {
   } else {
     res.sendFile(__dirname + "/login.html");
   }
+});
+// 삭제 기능
+app.get("/del", (req, res) => {
+  const delItem = req.query.delitem;
+  db.query(`DELETE FROM tb2 WHERE num = "${delItem}"`, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send(
+        `<script>alert('삭제 중 오류가 발생했습니다');window.location.href='/list'</script>`
+      );
+      return;
+    }
+    res.send(
+      `<script>alert('삭제가 완료되었습니다');window.location.href='/list'</script>`
+    );
+    console.log("Data deleted successfully");
+  });
 });
 
 app.get("/list", (req, res) => {
@@ -93,14 +132,17 @@ app.get("/list", (req, res) => {
     list += `        }`;
     list += ``;
     list += `        th {`;
-    list += `            background-color: rgb(121, 195, 255);`;
+    list += `            background-color: lightblue;`;
     list += `        }`;
     list += `    </style>`;
     list += `</head>`;
     list += ``;
     list += `<body>`;
     list += `    <!-- table>tr>th*5^tr>td*5 -->`;
-    list += `    <h2>게시글 목록</h2>`;
+    list += `    <h2>게시판 입니다.</h2>`;
+    if (req.session.adminOk) {
+      list += `    <h2>[관리자 권한]</h2>`;
+    }
     list += `<button type="button" onclick="location.href='/'">뒤로가기</button>`;
 
     list += `    <table>`;
@@ -110,7 +152,7 @@ app.get("/list", (req, res) => {
     list += `            <th>작성자</th>`;
     list += `            <th>작성일자</th>`;
     list += `            <th>조회수</th>`;
-    if (req.session.loggedIn) {
+    if (req.session.adminOk) {
       list += `            <th>삭제</th>`;
     }
 
@@ -119,7 +161,7 @@ app.get("/list", (req, res) => {
     data.forEach((v, i) => {
       list += `        <tr>`;
       list += `            <td>${v.num}</td>`;
-      list += `            <td>${v.title}</td>`;
+      list += `           <td><a href="/detail?search=${v.num}">${v.title}</a></td>`;
       list += `            <td>${v.name}</td>`;
       list += `            <td>${v.date}</td>`;
       list += `            <td>${v.count}</td>`;
@@ -127,7 +169,7 @@ app.get("/list", (req, res) => {
       // list += `            <td><button id="del${i}">삭제</button></td>`;
       /* 예2 */
 
-      if (req.session.loggedIn) {
+      if (req.session.adminOk) {
         list += `            <td><a href="/del?delitem=${v.num}">삭제</a></td>`;
       }
       list += `        </tr>`;
@@ -143,7 +185,22 @@ app.get("/list", (req, res) => {
     res.send(list);
   });
 });
-
+/* detail */
+app.get("/detail", (req, res) => {
+  const search = req.query.search;
+  console.log(search);
+  db.query(`SELECT * FROM tb2 WHERE num=${search}`, (err, results) => {
+    console.log(results[0]);
+    res.send(`
+      <div>${results[0].num}</div>
+      <div>${results[0].title}</div>
+      <div>${results[0].name}</div>
+      <div>${results[0].content}</div>
+      <div>${results[0].date}</div>
+      `);
+  });
+});
+/* 게시판 */
 app.post("/data", (req, res) => {
   const { title, name, date, content } = req.body;
   // db.query("INSERT INTO tb2 ( title, name, date, content,count) VALUES (?,?,?,?,?)", [title, name, date, content, 0], (err, result) => {
@@ -160,23 +217,6 @@ app.post("/data", (req, res) => {
       console.log("Data inserted successfully");
     }
   ); // MySQL query here
-});
-// 삭제 기능
-app.get("/del", (req, res) => {
-  const delItem = req.query.delitem;
-  db.query(`DELETE FROM tb2 WHERE num = "${delItem}"`, (err, result) => {
-    if (err) {
-      console.log(err);
-      res.send(
-        `<script>alert('삭제 중 오류가 발생했습니다');window.location.href='/list'</script>`
-      );
-      return;
-    }
-    res.send(
-      `<script>alert('삭제가 완료되었습니다');window.location.href='/list'</script>`
-    );
-    console.log("Data deleted successfully");
-  });
 });
 
 app.listen(port, () => {
