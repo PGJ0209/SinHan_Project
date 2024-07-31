@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+    <script>
+      const url = "https://jsonplaceholder.typicode.com/posts";
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          let list = "";
+          for (let i = 3; i < 9; i++) {
+            list += `<div>${i} 번째 ${data[i].title}</div>`;
+          }
+          document.write(list);
+        });
+    </script>
+  </head>
+
+  <body></body>
+</html>

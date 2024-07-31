@@ -56,6 +56,26 @@
         background-color: cadetblue;
       }
     </style>
+    <script>
+      function validateForm(event) {
+        const form = document.getElementById("dataForm");
+        const title = form.title.value.trim();
+        const name = form.name.value.trim();
+        const date = form.date.value.trim();
+        const content = form.content.value.trim();
+
+        if (!title || !name || !date || !content) {
+          alert("모든 내용을 입력해주세요!");
+          event.preventDefault(); // 하나라도 비어있으면 폼 제출을 막음
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        document
+          .getElementById("dataForm")
+          .addEventListener("submit", validateForm);
+      });
+    </script>
   </head>
 
   <body>

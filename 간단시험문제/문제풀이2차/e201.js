@@ -102,7 +102,7 @@ app.get("/del", (req, res) => {
     console.log("Data deleted successfully");
   });
 });
-
+// 게시판 글 목록 노출 SELECT * from tb2 로 tb2 에 입력된 게시글들 노출시켜주는 sql 문
 app.get("/list", (req, res) => {
   db.query("SELECT * from tb2", (err, results) => {
     const data = results;
@@ -190,17 +190,33 @@ app.get("/detail", (req, res) => {
   const search = req.query.search;
   console.log(search);
   db.query(`SELECT * FROM tb2 WHERE num=${search}`, (err, results) => {
-    console.log(results[0]);
+    if (err || results.length === 0) {
+      res.send(
+        `<script>alert('글을 찾을 수 없습니다.');window.location.href='/list'</script>`
+      );
+      return;
+    }
+    const counter = results[0].count + 1;
     res.send(`
-      <div>${results[0].num}</div>
-      <div>${results[0].title}</div>
-      <div>${results[0].name}</div>
-      <div>${results[0].content}</div>
-      <div>${results[0].date}</div>
+      <div>글번호: ${results[0].num}</div>
+      <div>제목: ${results[0].title}</div>
+      <div>작성자: ${results[0].name}</div>
+      <div>내용: ${results[0].content}</div>
+      <div>조회수: ${counter}</div>
       `);
+    db.query(
+      `UPDATE tb2 SET count = ${counter} WHERE num=${search}`, // 카운터 증가시 tb2 에 count 업데이트 시켜주는 sql문
+      (err, updateResult) => {
+        if (err) {
+          console.log("조회수 증가 중 오류 발생:", err); // 혹시나 에러뜨면 알려주기
+        } else {
+          console.log("조회수 증가:", counter); // 아니면 카운터 증가하기
+        }
+      }
+    );
   });
 });
-/* 게시판 */
+/* 게시판 (글쓰기)  */
 app.post("/data", (req, res) => {
   const { title, name, date, content } = req.body;
   // db.query("INSERT INTO tb2 ( title, name, date, content,count) VALUES (?,?,?,?,?)", [title, name, date, content, 0], (err, result) => {
