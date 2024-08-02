@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>리액트 CDN 연습</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style></style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const App = () => {
+        const initialCount = 0; //
+        const [count, setCount] = React.useState(0);
+        const upup = () => setCount(count + 1);
+        const downdown = () => setCount(count - 1);
+        const 두배 = () => setCount(count * 2);
+        const 둘로나누기 = () => setCount(count / 2);
+        const 리셋하기 = () => setCount(initialCount);
+        const 절대값 = () => setCount(Math.abs(count));
+        const 제곱 = () => setCount(count ** 2);
+        const dndn = () => setCount(count > 0 ? count - 1 : 0);
+        return (
+          <div>
+            <h1>JSX 문법으로 숫자올리기</h1>
+            <h2>
+              const [변수,변수값을 변경하는 함수] = React.useState(초기값)
+            </h2>
+            <hr />
+            <div>
+              <b>예제</b>
+            </div>
+            <div>
+              <mark>숫자값 증가시키기</mark>
+            </div>
+            <button onClick={리셋하기}>
+              <strong>리셋하기</strong>
+            </button>
+            <button onClick={절대값}>
+              <strong>절대값</strong>
+            </button>
+            <button onClick={제곱}>
+              <strong>제곱</strong>
+            </button>
+            <button onClick={upup}>
+              <strong>클릭업</strong>
+            </button>
+            <button onClick={downdown}>
+              <strong>클릭다운</strong>
+            </button>
+            <button onClick={두배}>
+              <strong>클릭 2곱하기</strong>
+            </button>
+            <button onClick={둘로나누기}>
+              <strong>클릭 2나누기</strong>
+            </button>
+            <h2>{count}</h2>
+          </div>
+        );
+      };
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>

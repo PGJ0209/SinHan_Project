@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const App = () => {
+        const [count, setCount] = React.useState(0);
+        const upup = () => setCount(count < 4 ? count + 1 : 4);
+        const dndn = () => setCount(count > 0 ? count - 1 : 0);
+        const arr = [
+          "안녕하세요",
+          "반갑습니다",
+          "오늘은참덥네요",
+          "배가고프시죠",
+          "아아드실까요",
+        ];
+        return (
+          <>
+            <h1>숫자증가 문제</h1>
+            <h2>
+              {`const arr = ['안녕하세요', '반갑습니다', '오늘은참덥네요', '배가고프시죠', '아아드실까요']`}
+            </h2>
+            <hr />
+
+            <button onClick={dndn}>
+              <strong>👈</strong>
+            </button>
+            <h3>{arr[count]}</h3>
+            <button onClick={upup}>
+              <strong>👉</strong>
+            </button>
+          </>
+        );
+      };
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>
