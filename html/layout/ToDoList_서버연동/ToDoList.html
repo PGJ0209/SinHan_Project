@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 스타일 그대로 유지 */
+      body {
+        text-align: center;
+      }
+      h2 {
+        color: rgb(39, 118, 255);
+        font-size: 40px;
+        text-align: center;
+        border-radius: 10px;
+      }
+      button {
+        background-color: rgb(208, 225, 255);
+        border-radius: 10px;
+        padding: 10px 20px;
+        border: none;
+        margin-left: -4px;
+      }
+      input {
+        width: 300px;
+        height: 40px;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 10px 0 0 10px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        margin: 0;
+        border-right: none;
+      }
+      .input-group {
+        display: flex;
+        align-items: center;
+      }
+      button + input {
+        border-radius: 0 10px 10px 0;
+      }
+      span {
+        color: white;
+        background-color: rgb(163, 195, 250);
+        border-radius: 10px;
+        padding: 20px 30px;
+      }
+      div {
+        margin: 80px 30px 10px 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>할 일 목록</h2>
+    <div class="input-group">
+      <input type="text" id="taskInput" placeholder="할 일을 입력하세요" />
+      <button onclick="addTask()">추가하기</button>
+    </div>
+    <div id="taskList"></div>
+
+    <script>
+      // 백엔드에서 데이터를 불러오기
+      function loadTasks() {
+        fetch("http://localhost:3000/tasks")
+          .then((response) => response.json())
+          .then((tasks) => {
+            const taskList = document.getElementById("taskList");
+            taskList.innerHTML = ""; // 기존 리스트 지우기
+            tasks.forEach((task) => {
+              const taskDiv = document.createElement("div");
+              taskDiv.textContent = task.task;
+              taskList.appendChild(taskDiv);
+            });
+          });
+      }
+
+      // 할 일을 추가하는 함수
+      function addTask() {
+        const taskInput = document.getElementById("taskInput");
+        const task = taskInput.value;
+
+        fetch("http://localhost:3000/tasks", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ task }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Success:", data);
+            loadTasks(); // 새로 추가한 항목을 불러옴
+            taskInput.value = ""; // 입력창 초기화
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+
+      // 페이지 로드 시 할 일 목록 불러오기
+      document.addEventListener("DOMContentLoaded", loadTasks);
+    </script>
+  </body>
+</html>

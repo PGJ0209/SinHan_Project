@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        text-align: center;
+      }
+      h2 {
+        color: rgb(39, 118, 255);
+        font-size: 40px;
+        text-align: center;
+        border-radius: 10px;
+      }
+      button {
+        background-color: rgb(208, 225, 255);
+        border-radius: 10px;
+        padding: 10px 20px; /* 버튼의 크기를 키우기 위해 패딩 추가 */
+        border: none;
+        margin-left: -4px; /* 버튼과 입력창 사이의 여백을 줄이기 위해 음수 margin 사용 */
+      }
+
+      input {
+        width: 300px; /* 입력창의 너비를 조정 */
+        height: 40px; /* 입력창의 높이를 조정 */
+        padding: 10px;
+        font-size: 16px; /* 입력 텍스트의 크기를 키우기 */
+        border-radius: 10px 0 0 10px; /* 왼쪽 끝 둥글게 */
+        border: 1px solid #ccc; /* 테두리 추가 */
+        box-sizing: border-box; /* 패딩과 테두리가 전체 크기에 포함되도록 설정 */
+        margin: 0;
+        border-right: none; /* 버튼과 맞닿는 부분의 테두리를 제거 */
+      }
+
+      .input-group {
+        display: flex; /* input과 button을 한 줄에 배치 */
+        align-items: center; /* 세로 가운데 정렬 */
+      }
+
+      button + input {
+        border-radius: 0 10px 10px 0; /* 오른쪽 끝 둥글게 */
+      }
+
+      span {
+        color: white;
+        background-color: rgb(163, 195, 250);
+        border-radius: 10px;
+        padding: 20px 30px;
+      }
+      div {
+        margin: 80px 30px 10px 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>할 일 목록</h2>
+    <input type="text" />
+    <button>추가하기</button>
+    <div>=========================================</div>
+
+    <script>
+      const input = document.querySelector("input");
+      const btn = document.querySelector("button");
+      const list = document.querySelector("div");
+      let inputData;
+      input.addEventListener("keyup", (e) => {
+        inputData = e.currentTarget.value;
+      });
+      btn.addEventListener("click", () => {
+        if (inputData) {
+          const vdiv = document.createElement("div"); // 라인 하나 추가
+          const vcheck = document.createElement("input"); // 체크박스 추가
+          const vspan = document.createElement("span"); // 추가된 내용
+          const vbutton = document.createElement("button"); // 버튼 추가
+          list.appendChild(vdiv).append(vcheck, vspan, vbutton);
+
+          vspan.textContent = inputData;
+          vcheck.type = "checkbox";
+          vbutton.textContent = "삭제";
+          input.value = inputData = null; // 내용 비우기
+
+          vcheck.addEventListener("click", (e) => {
+            vdiv.style.color = e.currentTarget.checked ? "gray" : "black"; // 색넣기
+            vdiv.style.textDecoration = e.currentTarget.checked
+              ? "line-through"
+              : "none"; // 가운데 줄긋기
+            console.log(e.currentTarget.checked);
+          });
+          vbutton.addEventListener("click", (e) => {
+            if (e.target) list.removeChild(vdiv);
+          });
+        } else alert("내용을 입력하세요.");
+      });
+    </script>
+  </body>
+</html>
