@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>할 일 목록 </h2>
+    <input type="text">
+    <button>추가하기</button>
+    <div></div>
+
+    <script>
+        const input = document.querySelector('input');
+        const btn = document.querySelector('button');
+        const list = document.querySelector('div');
+        let inputData;
+        input.addEventListener('keyup', (e) => {
+            inputData = e.currentTarget.value
+        })
+        btn.addEventListener('click', () => {
+            if (inputData) {
+                const vdiv = document.createElement('div') // 라인 하나 추가
+                const vcheck = document.createElement('input') // 체크박스 추가
+                const vspan = document.createElement('span'); // 추가된 내용
+                const vbutton = document.createElement('button'); // 버튼 추가
+                list.appendChild(vdiv).append(vcheck, vspan, vbutton);
+                vcheck.type = 'checkbox';
+                vspan.textContent = inputData;
+                vbutton.textContent = '삭제'
+                input.value = inputData = null; // 내용 비우기
+
+                vcheck.addEventListener('click', (e) => {
+                    vdiv.style.color = e.currentTarget.checked ? 'lightgray' : 'black' // 색넣기
+                    vdiv.style.textDecoration = e.currentTarget.checked ? 'line-through' : 'none' // 가운데 줄긋기
+                    console.log(e.currentTarget.checked)
+                })
+
+                vbutton.addEventListener('click', (e) => {
+                    if (e.target) list.removeChild(vdiv)
+                })
+
+
+            } else (alert('내용을 입력하세요.'))
+
+        })
+    </script>
+</body>
+
+</html>
