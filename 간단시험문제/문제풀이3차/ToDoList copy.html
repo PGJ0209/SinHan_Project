@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDoList</title>
+    <style>
+      /* Optional: Initially hide the "모두 삭제" button */
+      #allremove {
+        display: none;
+      }
+    </style>
   </head>
 
   <body>
@@ -14,15 +20,22 @@
     <input type="text" />
     <button id="add-btn">추가하기</button>
     <div></div>
+    <br />
+    <button id="allremove">모두 삭제</button>
+    <!-- 모두 삭제 버튼 추가 -->
 
     <script>
       const input = document.querySelector("input");
       const btn = document.querySelector("#add-btn");
       const list = document.querySelector("div");
+      const allremove = document.querySelector("#allremove"); // 모두 삭제 버튼 가져오기
+
       let inputData;
+
       input.addEventListener("keyup", (e) => {
         inputData = e.currentTarget.value;
       });
+
       btn.addEventListener("click", () => {
         if (inputData) {
           const vdiv = document.createElement("div"); // 라인 하나 추가
@@ -35,19 +48,40 @@
           vbutton.textContent = "삭제";
           input.value = inputData = null; // 내용 비우기
 
+          // 체크박스 클릭 시 텍스트 스타일 변경
           vcheck.addEventListener("click", (e) => {
-            vdiv.style.color = e.currentTarget.checked ? "lightgray" : "black"; // 색넣기
+            vdiv.style.color = e.currentTarget.checked ? "lightgray" : "black"; // 색 변경
             vdiv.style.textDecoration = e.currentTarget.checked
               ? "line-through"
-              : "none"; // 가운데 줄긋기
-            console.log(e.currentTarget.checked);
+              : "none"; // 가운데 줄 긋기
           });
 
+          // 삭제 버튼 클릭 시 해당 할 일 항목 삭제
           vbutton.addEventListener("click", (e) => {
             if (e.target) list.removeChild(vdiv);
+            toggleAllRemoveButton(); // 항목 삭제 후 "모두 삭제" 버튼 표시 여부 업데이트
           });
-        } else alert("내용을 입력하세요.");
+
+          toggleAllRemoveButton(); // 항목 추가 후 "모두 삭제" 버튼 표시 여부 업데이트
+        } else {
+          alert("내용을 입력하세요."); // 입력값이 없을 때 경고
+        }
       });
+
+      // "모두 삭제" 버튼 클릭 시 모든 할 일 항목 삭제
+      allremove.addEventListener("click", () => {
+        list.innerHTML = ""; // 할 일 목록 비우기
+        toggleAllRemoveButton(); // 목록이 비워진 후 "모두 삭제" 버튼 표시 여부 업데이트
+      });
+
+      // 리스트에 항목이 있을 때만 "모두 삭제" 버튼을 표시하는 함수
+      function toggleAllRemoveButton() {
+        if (list.children.length > 0) {
+          allremove.style.display = "block"; // 리스트에 항목이 있으면 버튼 표시
+        } else {
+          allremove.style.display = "none"; // 리스트가 비어있으면 버튼 숨기기
+        }
+      }
     </script>
   </body>
 </html>

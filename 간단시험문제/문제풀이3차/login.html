@@ -19,7 +19,7 @@
         background-color: #fff;
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         width: 300px;
       }
 
@@ -52,11 +52,11 @@
         background-color: #0056b3;
       }
 
-      .login-container .reset-btn {
+      .login-container .to-join {
         background-color: #6c757d;
       }
 
-      .login-container .reset-btn:hover {
+      .login-container .to-join:hover {
         background-color: #5a6268;
       }
     </style>
@@ -80,16 +80,18 @@
           type="password"
           id="pw"
           name="password"
-          placeholder="비밀번호를 입력해주세요"
+          placeholder="비밀번호"
           required
         />
         <button type="submit">로그인</button>
+        <hr />
+        회원이 아니신 분은 회원가입을 해주세요.
         <button
           type="button"
-          class="tojoin"
-          onclick="window.location.href='/join' "
+          class="to-join"
+          onclick="window.location.href='/join'"
         >
-          회원가입
+          가입하기
         </button>
       </form>
     </div>

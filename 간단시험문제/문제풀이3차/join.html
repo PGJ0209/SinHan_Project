@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>회원가입 페이지</title>
     <style>
       body {
         width: 500px;
@@ -65,13 +65,37 @@
       <legend>회원가입</legend>
       <form action="data" id="dataForm">
         <label for="id">아이디</label>
-        <input type="text" id="id" name="id" /><br />
+        <input
+          type="text"
+          id="id"
+          placeholder="아이디를 입력해주세요"
+          name="id"
+          required
+        /><br />
         <label for="password">비밀번호</label>
-        <input type="password" id="password" name="password" /><br />
+        <input
+          type="password"
+          id="password"
+          placeholder="비밀번호를 입력해주세요"
+          name="password"
+          required
+        /><br />
         <label for="name">이름</label>
-        <input type="text" id="name" name="name" /><br />
+        <input
+          type="text"
+          id="name"
+          placeholder="이름를 입력해주세요"
+          name="name"
+          required
+        /><br />
         <label for="email">이메일</label>
-        <input type="text" id="email" name="email" /><br />
+        <input
+          type="text"
+          id="email"
+          placeholder="이메일를 입력해주세요"
+          name="email"
+          required
+        /><br />
         <button type="submit">가입</button>
         <button type="reset">내용지우기</button>
       </form>
