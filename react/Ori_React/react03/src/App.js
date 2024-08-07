@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import Join from "./pages/join";
 function App() {
   const [text, setText] = useState("안녕하세요.");
 
@@ -11,6 +12,7 @@ function App() {
       <input type="text" onChange={handleInput} value={text} />
       <button onClick={handleDelete}>지우기</button>
       <h3>{text}</h3>
+      <Join></Join>
     </>
   );
 }
