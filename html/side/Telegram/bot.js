@@ -145,5 +145,10 @@ bot.onText(/(따라해)/, (msg, match) => {
   const resp = match.input;
   bot.sendMessage(chatId, resp);
 });
+bot.onText(/(고마워)/, (msg, match) => {
+  const chatId = msg.chat.id;
+  const resp = "엣헴~ 이런건 파푸한테 어려운게 아니다 푸! (우쭐) "; 
+  bot.sendMessage(chatId, resp);
+});
 
 console.log("봇이 가동되었다 푸~");
